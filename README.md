@@ -1,0 +1,1 @@
+All input files should be downloaded manually on https://adventofcode.com/2023
