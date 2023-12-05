@@ -28,7 +28,8 @@ with open('day5input.txt') as f:
 result_location = []
 for seed in seeds:
 	print("seed:", seed, end="")
-	for mapping in conversion[:-1]:
+	# Somithing is wrong don't know... It gave me the right answer, so don't care
+	for mapping in conversion:
 		curr_seed=seed
 		for single_map in mapping:
 			temp = seed - single_map[0]
@@ -76,7 +77,7 @@ for mapping in conversion:
 			next_seed.append(seed)
 	seedsb = next_seed.copy()
 
-#print(min(result_location))
+print(min(result_location))
 mini = max(result_location)
 for i in range(len(seedsb)):
 	if seedsb[i][0] < mini:
