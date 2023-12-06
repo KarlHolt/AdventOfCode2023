@@ -19,17 +19,27 @@ with open('day6input.txt') as f:
 				temp+=num
 			true_distance = int(temp)
 
+def dist_time(time_for_race, charge_time):
+	return charge_time*(time_for_race - charge_time)
+
 def calc_time(time_for_race, distance_to_beat):
-	low = time_for_race
-	high = 0
-	for i in range(time_for_race):
-		distance_for_time = i*(time_for_race - i)
-		if distance_for_time > distance_to_beat:
-			if i < low:
-				low = i
-			if i > high:
-				high = i
-	return max(high - low + 1, 0)
+	lowering_range = [0, time_for_race]
+	while(lowering_range[0] != lowering_range[1]-1):
+		temp = (lowering_range[0]+lowering_range[1])//2
+		if dist_time(time_for_race, temp) > distance_to_beat:
+			lowering_range[1] = temp
+		else:
+			lowering_range[0] = temp
+
+	increasing_range = [0, time_for_race]
+	while(increasing_range[0] != increasing_range[1]-1):
+		temp = (increasing_range[0]+increasing_range[1])//2
+		if dist_time(time_for_race, temp) < distance_to_beat:
+			increasing_range[1] = temp
+		else:
+			increasing_range[0] = temp
+
+	return max(increasing_range[0] - lowering_range[1] + 1, 0)
 
 result = 1
 for i in range(len(times)):
